@@ -1,111 +1,85 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harmony Home Furnishings</title>
 
-<title>Harmony Home Furnishings — Brought to you by Danielle and Dave</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
 
 body{
-font-family: Arial, Helvetica, sans-serif;
+font-family:Arial;
 margin:0;
 background:#f4f4f4;
 }
 
 header{
-background:#1e1e1e;
+background:#1c1c1c;
 color:white;
-text-align:center;
 padding:35px;
-}
-
-header h1{
-margin:0;
-font-size:38px;
+text-align:center;
 }
 
 nav{
 background:#333;
-padding:12px;
+padding:15px;
 text-align:center;
 }
 
 nav a{
 color:white;
 margin:15px;
-text-decoration:none;
 font-weight:bold;
+text-decoration:none;
 }
 
-nav a:hover{
-text-decoration:underline;
+.hero{
+text-align:center;
+padding:60px;
 }
 
-.container{
+.hero h2{
+font-size:40px;
+}
+
+.category-grid{
 display:flex;
 flex-wrap:wrap;
 justify-content:center;
 padding:30px;
 }
 
-.product{
+.category{
 background:white;
 width:260px;
-margin:15px;
+margin:20px;
 border-radius:6px;
-box-shadow:0 3px 8px rgba(0,0,0,0.15);
+box-shadow:0 3px 8px rgba(0,0,0,.15);
 text-align:center;
 }
 
-.product img{
+.category img{
 width:100%;
-height:200px;
+height:180px;
 object-fit:cover;
 border-radius:6px 6px 0 0;
 }
 
-.product h3{
-margin:10px;
-}
-
-.price{
-color:#2e7d32;
-font-size:18px;
-}
-
-.product a{
-display:inline-block;
-margin:12px;
-padding:8px 14px;
+.category a{
+display:block;
+padding:12px;
 background:#2e7d32;
 color:white;
 text-decoration:none;
-border-radius:4px;
-}
-
-.product a:hover{
-background:#1b5e20;
-}
-
-footer{
-background:#222;
-color:white;
-text-align:center;
-padding:20px;
-margin-top:40px;
 }
 
 </style>
 
 </head>
 
-
 <body>
-
 
 <header>
 
@@ -113,193 +87,60 @@ margin-top:40px;
 
 <p>Brought to you by Danielle and Dave</p>
 
-<p>Beautiful furniture sourced from trusted suppliers</p>
-
 </header>
-
 
 <nav>
 
-<a href="#">Living Room</a>
-<a href="#">Bedroom</a>
-<a href="#">Dining</a>
-<a href="#">Outdoor</a>
+<a href="livingroom.html">Living Room</a>
+<a href="bedroom.html">Bedroom</a>
+<a href="dining.html">Dining</a>
+<a href="outdoor.html">Outdoor</a>
 
 </nav>
 
+<div class="hero">
 
-<div class="container">
+<h2>Beautiful Furniture For Every Home</h2>
 
+<p>Quality pieces sourced from trusted suppliers</p>
 
-<div class="product">
+</div>
+
+<div class="category-grid">
+
+<div class="category">
 
 <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc">
 
-<h3>Modern Sectional Sofa</h3>
-
-<p class="price">$899 Average Sale</p>
-
-<a href="https://www.aliexpress.com/">View Supplier</a>
+<a href="livingroom.html">Shop Living Room</a>
 
 </div>
 
-
-<div class="product">
+<div class="category">
 
 <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85">
 
-<h3>Luxury Bed Frame</h3>
-
-<p class="price">$699 Average Sale</p>
-
-<a href="https://www.alibaba.com/">View Supplier</a>
+<a href="bedroom.html">Shop Bedroom</a>
 
 </div>
 
-
-<div class="product">
+<div class="category">
 
 <img src="https://images.unsplash.com/photo-1615873968403-89e068629265">
 
-<h3>Wood Dining Table</h3>
-
-<p class="price">$499 Average Sale</p>
-
-<a href="https://www.spocket.co/">View Supplier</a>
+<a href="dining.html">Shop Dining</a>
 
 </div>
 
-
-<div class="product">
-
-<img src="https://images.unsplash.com/photo-1598300053653-1fbdc46c3c29">
-
-<h3>Accent Chair</h3>
-
-<p class="price">$249 Average Sale</p>
-
-<a href="https://www.doba.com/">View Supplier</a>
-
-</div>
-
-
-<div class="product">
-
-<img src="https://images.unsplash.com/photo-1616627988929-7c4b5a4c4b7f">
-
-<h3>Farmhouse Coffee Table</h3>
-
-<p class="price">$199 Average Sale</p>
-
-<a href="https://www.aliexpress.com/">View Supplier</a>
-
-</div>
-
-
-<div class="product">
-
-<img src="https://images.unsplash.com/photo-1560448075-bb4caa6fbe6c">
-
-<h3>Modern TV Stand</h3>
-
-<p class="price">$279 Average Sale</p>
-
-<a href="https://www.alibaba.com/">View Supplier</a>
-
-</div>
-
-
-<div class="product">
-
-<img src="https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf">
-
-<h3>Queen Mattress</h3>
-
-<p class="price">$599 Average Sale</p>
-
-<a href="https://www.spocket.co/">View Supplier</a>
-
-</div>
-
-
-<div class="product">
-
-<img src="https://images.unsplash.com/photo-1583845112239-97ef1341b271">
-
-<h3>Office Desk</h3>
-
-<p class="price">$349 Average Sale</p>
-
-<a href="https://www.doba.com/">View Supplier</a>
-
-</div>
-
-
-<div class="product">
+<div class="category">
 
 <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb3">
 
-<h3>Bookshelf</h3>
-
-<p class="price">$189 Average Sale</p>
-
-<a href="https://www.aliexpress.com/">View Supplier</a>
+<a href="outdoor.html">Shop Outdoor</a>
 
 </div>
 
-
-<div class="product">
-
-<img src="https://images.unsplash.com/photo-1598300042247-d088f8ab3a91">
-
-<h3>Nightstand</h3>
-
-<p class="price">$129 Average Sale</p>
-
-<a href="https://www.alibaba.com/">View Supplier</a>
-
 </div>
-
-
-<div class="product">
-
-<img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511">
-
-<h3>Outdoor Patio Set</h3>
-
-<p class="price">$899 Average Sale</p>
-
-<a href="https://www.spocket.co/">View Supplier</a>
-
-</div>
-
-
-<div class="product">
-
-<img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace">
-
-<h3>Luxury Recliner</h3>
-
-<p class="price">$499 Average Sale</p>
-
-<a href="https://www.doba.com/">View Supplier</a>
-
-</div>
-
-
-</div>
-
-
-<footer>
-
-<p>Harmony Home Furnishings</p>
-
-<p>Brought to you by Danielle and Dave</p>
-
-<p>Online Furniture Marketplace</p>
-
-</footer>
-
 
 </body>
 
