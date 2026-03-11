@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cart - Harmony Home Furnishings</title>
+
+<link rel="stylesheet" href="css/style.css">
+<script src="js/products.js" defer></script>
+<script src="js/utils.js" defer></script>
+<script src="js/cart.js" defer></script>
+</head>
+
+<body>
+
+<header class="header">
+  <div class="logo">Harmony Home Furnishings</div>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="living-room.html">Living Room</a>
+    <a href="bedroom.html">Bedroom</a>
+    <a href="dining.html">Dining</a>
+    <a href="outdoor.html">Outdoor</a>
+    <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+  </nav>
+</header>
+
+<section class="cart-page">
+  <h1>Your Shopping Cart</h1>
+
+  <div class="cart-items"></div>
+
+  <h2 class="cart-total">Total: $0</h2>
+
+  <button class="checkout-btn" onclick="checkout()">Checkout</button>
+</section>
+
+</body>
+</html>
