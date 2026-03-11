@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Search Results - Harmony Home Furnishings</title>
+
+<link rel="stylesheet" href="css/style.css">
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+<script src="js/products.js" defer></script>
+<script src="js/utils.js" defer></script>
+<script src="js/cart.js" defer></script>
+</head>
+
+<body>
+
+<header class="header">
+  <div class="logo">Harmony Home Furnishings</div>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="living-room.html">Living Room</a>
+    <a href="bedroom.html">Bedroom</a>
+    <a href="dining.html">Dining</a>
+    <a href="outdoor.html">Outdoor</a>
+    <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+  </nav>
+</header>
+
+<section class="category-page">
+  <h1>Search Results</h1>
+  <div class="products-grid" id="search-results"></div>
+</section>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const query = params.get("q") || "";
+
+const results = searchProducts(query);
+const grid = document.getElementById("search-results");
+
+results.forEach(p => {
+  const div = document.createElement("div");
+  div.className = "product";
+  div.innerHTML = `
+    <img src="${p.image}" alt="${p.name}">
+    <h3>${p.name}</h3>
+    <p>$${p.price}</p>
+
+    <model-viewer 
+      src="${p.glb}" 
+      ios-src="${p.usdz}" 
+      ar 
+      camera-controls 
+      auto-rotate 
+      style="width:100%;height:300px;">
+    </model-viewer>
+
+    <button onclick="addToCart(${p.id})">Add to Cart</button>
+  `;
+  grid.appendChild(div);
+});
+</script>
+
+</body>
+</html>
