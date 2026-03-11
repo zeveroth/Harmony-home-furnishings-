@@ -1,94 +1,92 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Living Room - Harmony Home Furnishings</title>
 
-<title>Living Room Furniture</title>
+<link rel="stylesheet" href="css/style.css">
 
-<style>
+<!-- AR viewer -->
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
-body{font-family:Arial;margin:0;background:#f4f4f4;}
-
-header{background:#222;color:white;text-align:center;padding:30px;}
-
-.products{display:flex;flex-wrap:wrap;justify-content:center;padding:20px;}
-
-.product{
-background:white;
-width:260px;
-margin:15px;
-box-shadow:0 3px 8px rgba(0,0,0,.15);
-border-radius:6px;
-text-align:center;
-}
-
-.product img{
-width:100%;
-height:200px;
-object-fit:cover;
-}
-
-.product a{
-display:block;
-background:#2e7d32;
-color:white;
-padding:10px;
-text-decoration:none;
-}
-
-</style>
-
+<!-- JS files -->
+<script src="js/products.js" defer></script>
+<script src="js/utils.js" defer></script>
+<script src="js/cart.js" defer></script>
 </head>
 
 <body>
 
-<header>
+<header class="header">
+  <div class="logo">Harmony Home Furnishings</div>
 
-<h1>Living Room Furniture</h1>
-
-<a href="index.html" style="color:white;">Back Home</a>
-
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="living-room.html">Living Room</a>
+    <a href="bedroom.html">Bedroom</a>
+    <a href="dining.html">Dining</a>
+    <a href="outdoor.html">Outdoor</a>
+    <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+  </nav>
 </header>
 
-<div class="products">
+<section class="category-page">
+  <h1>Living Room Furniture</h1>
 
-<div class="product">
+  <!-- FILTER BAR -->
+  <div class="filter-bar">
+    <input type="number" id="minPrice" placeholder="Min Price">
+    <input type="number" id="maxPrice" placeholder="Max Price">
+    <select id="ratingFilter">
+      <option value="">Rating</option>
+      <option value="4">4★ & up</option>
+      <option value="4.5">4.5★ & up</option>
+    </select>
+    <button onclick="applyFilters('living')">Apply</button>
+  </div>
 
-<img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc">
+  <!-- PRODUCT GRID -->
+  <div class="products-grid" id="products-grid"></div>
+</section>
 
-<h3>Modern Sectional Sofa</h3>
+<script>
+const grid = document.getElementById("products-grid");
 
-<p>$899 Average</p>
+function renderLiving(list) {
+  grid.innerHTML = "";
 
-<a href="https://www.aliexpress.com">Supplier</a>
+  list
+    .filter(p => p.category === "living")
+    .forEach(p => {
+      const div = document.createElement("div");
+      div.className = "product";
 
-</div>
+      div.innerHTML = `
+        <img src="${p.image}" alt="${p.name}">
+        <h3>${p.name}</h3>
+        <p>$${p.price}</p>
 
-<div class="product">
+        <model-viewer 
+          src="${p.glb}" 
+          ios-src="${p.usdz}" 
+          ar 
+          camera-controls 
+          auto-rotate 
+          style="width:100%;height:300px;">
+        </model-viewer>
 
-<img src="https://images.unsplash.com/photo-1598300053653-1fbdc46c3c29">
+        <button onclick="addToCart(${p.id})">Add to Cart</button>
+      `;
 
-<h3>Accent Chair</h3>
+      grid.appendChild(div);
+    });
+}
 
-<p>$249 Average</p>
-
-<a href="https://www.alibaba.com">Supplier</a>
-
-</div>
-
-<div class="product">
-
-<img src="https://images.unsplash.com/photo-1616627988929-7c4b5a4c4b7f">
-
-<h3>Coffee Table</h3>
-
-<p>$199 Average</p>
-
-<a href="https://www.spocket.co">Supplier</a>
-
-</div>
-
-</div>
+document.addEventListener("DOMContentLoaded", () => {
+  renderLiving(products);
+});
+</script>
 
 </body>
-
 </html>
