@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Product - Harmony Home Furnishings</title>
+
+<link rel="stylesheet" href="css/style.css">
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+<script src="js/products.js" defer></script>
+<script src="js/cart.js" defer></script>
+</head>
+
+<body>
+
+<header class="header">
+  <div class="logo">Harmony Home Furnishings</div>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+  </nav>
+</header>
+
+<section class="category-page">
+  <div id="product-container"></div>
+</section>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const id = Number(params.get("id"));
+const product = products.find(p => p.id === id);
+
+const container = document.getElementById("product-container");
+
+if (product) {
+  container.innerHTML = `
+    <h1>${product.name}</h1>
+    <img src="${product.image}" style="width:100%;max-width:500px;border-radius:10px;">
+    <p style="font-size:1.4rem;margin:10px 0;">$${product.price}</p>
+
+    <model-viewer 
+      src="${product.glb}" 
+      ios-src="${product.usdz}" 
+      ar 
+      camera-controls 
+      auto-rotate 
+      style="width:100%;height:400px;">
+    </model-viewer>
+
+    <button onclick="addToCart(${product.id})">Add to Cart</button>
+  `;
+} else {
+  container.innerHTML = "<p>Product not found.</p>";
+}
+</script>
+
+</body>
+</html>
