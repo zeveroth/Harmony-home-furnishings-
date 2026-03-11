@@ -1,147 +1,48 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Harmony Home Furnishings</title>
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<style>
-
-body{
-font-family:Arial;
-margin:0;
-background:#f4f4f4;
-}
-
-header{
-background:#1c1c1c;
-color:white;
-padding:35px;
-text-align:center;
-}
-
-nav{
-background:#333;
-padding:15px;
-text-align:center;
-}
-
-nav a{
-color:white;
-margin:15px;
-font-weight:bold;
-text-decoration:none;
-}
-
-.hero{
-text-align:center;
-padding:60px;
-}
-
-.hero h2{
-font-size:40px;
-}
-
-.category-grid{
-display:flex;
-flex-wrap:wrap;
-justify-content:center;
-padding:30px;
-}
-
-.category{
-background:white;
-width:260px;
-margin:20px;
-border-radius:6px;
-box-shadow:0 3px 8px rgba(0,0,0,.15);
-text-align:center;
-}
-
-.category img{
-width:100%;
-height:180px;
-object-fit:cover;
-border-radius:6px 6px 0 0;
-}
-
-.category a{
-display:block;
-padding:12px;
-background:#2e7d32;
-color:white;
-text-decoration:none;
-}
-
-</style>
-
+<link rel="stylesheet" href="css/style.css">
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+<script src="js/products.js" defer></script>
+<script src="js/utils.js" defer></script>
+<script src="js/cart.js" defer></script>
 </head>
 
 <body>
 
-<header>
+<header class="header">
+  <div class="logo">Harmony Home Furnishings</div>
 
-<h1>Harmony Home Furnishings</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="living-room.html">Living Room</a>
+    <a href="bedroom.html">Bedroom</a>
+    <a href="dining.html">Dining</a>
+    <a href="outdoor.html">Outdoor</a>
+    <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+  </nav>
 
-<p>Brought to you by Danielle and Dave</p>
-
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Search furniture...">
+    <button onclick="performSearch()">Search</button>
+  </div>
 </header>
 
-<nav>
+<section class="hero">
+  <h1>Beautiful Furniture. AR Ready.</h1>
+  <p>Preview furniture in your home instantly using AR.</p>
+</section>
 
-<a href="livingroom.html">Living Room</a>
-<a href="bedroom.html">Bedroom</a>
-<a href="dining.html">Dining</a>
-<a href="outdoor.html">Outdoor</a>
-
-</nav>
-
-<div class="hero">
-
-<h2>Beautiful Furniture For Every Home</h2>
-
-<p>Quality pieces sourced from trusted suppliers</p>
-
-</div>
-
-<div class="category-grid">
-
-<div class="category">
-
-<img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc">
-
-<a href="livingroom.html">Shop Living Room</a>
-
-</div>
-
-<div class="category">
-
-<img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85">
-
-<a href="bedroom.html">Shop Bedroom</a>
-
-</div>
-
-<div class="category">
-
-<img src="https://images.unsplash.com/photo-1615873968403-89e068629265">
-
-<a href="dining.html">Shop Dining</a>
-
-</div>
-
-<div class="category">
-
-<img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb3">
-
-<a href="outdoor.html">Shop Outdoor</a>
-
-</div>
-
-</div>
+<section class="categories">
+  <a href="living-room.html" class="category-card">Living Room</a>
+  <a href="bedroom.html" class="category-card">Bedroom</a>
+  <a href="dining.html" class="category-card">Dining</a>
+  <a href="outdoor.html" class="category-card">Outdoor</a>
+</section>
 
 </body>
-
 </html>
