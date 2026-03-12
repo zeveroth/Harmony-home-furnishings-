@@ -110,6 +110,60 @@
       padding: 12px;
       margin: 0;
     }
+
+    /* STICKY MOBILE ADD-TO-CART BAR */
+    .sticky-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #fff;
+      border-top: 1px solid #ddd;
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 2000;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+    }
+
+    .sticky-price {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .sticky-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .sticky-btn {
+      padding: 10px 16px;
+      border-radius: 6px;
+      font-size: 14px;
+      border: none;
+      cursor: pointer;
+      color: white;
+    }
+
+    .sticky-cart {
+      background: #e67e22;
+    }
+
+    .sticky-wish {
+      background: #c0392b;
+    }
+
+    .sticky-ar {
+      background: #111;
+    }
+
+    /* HIDE STICKY BAR ON DESKTOP */
+    @media (min-width: 768px) {
+      .sticky-bar {
+        display: none;
+      }
+    }
   </style>
 </head>
 
@@ -123,6 +177,16 @@
   <h2>Related Products</h2>
   <div id="related-grid" class="related-grid"></div>
 </section>
+
+<!-- STICKY MOBILE BAR -->
+<div id="sticky-bar" class="sticky-bar" style="display:none;">
+  <div class="sticky-price" id="sticky-price">$0</div>
+  <div class="sticky-buttons">
+    <button class="sticky-btn sticky-ar" id="sticky-ar">AR</button>
+    <button class="sticky-btn sticky-cart" id="sticky-cart">Add</button>
+    <button class="sticky-btn sticky-wish" id="sticky-wish">Wish</button>
+  </div>
+</div>
 
 <div data-include="global-footer.html"></div>
 
@@ -138,6 +202,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
+  // MAIN PRODUCT CONTENT
   document.getElementById("product-area").innerHTML = `
     <div class="product-container">
       <div class="product-image">
@@ -179,6 +244,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
     relatedGrid.appendChild(card);
   });
+
+  // STICKY BAR SETUP
+  const stickyBar = document.getElementById("sticky-bar");
+  const stickyPrice = document.getElementById("sticky-price");
+  const stickyAR = document.getElementById("sticky-ar");
+  const stickyCart = document.getElementById("sticky-cart");
+  const stickyWish = document.getElementById("sticky-wish");
+
+  stickyPrice.textContent = "$" + product.price;
+
+  stickyAR.onclick = () => window.location = product.usdz;
+  stickyCart.onclick = () => addToCart(product);
+  stickyWish.onclick = () => addToWishlist(product);
+
+  // SHOW STICKY BAR ON MOBILE
+  if (window.innerWidth < 768) {
+    stickyBar.style.display = "flex";
+  }
 });
 </script>
 
