@@ -4,6 +4,8 @@
   <title>Product Details</title>
   <script src="include-loader.js" defer></script>
   <script src="js/products.js" defer></script>
+  <script src="js/cart.js" defer></script>
+  <script src="js/wishlist.js" defer></script>
 
   <style>
     .product-container {
@@ -44,13 +46,14 @@
       margin-bottom: 20px;
     }
 
-    .ar-btn, .cart-btn {
+    .ar-btn, .cart-btn, .wishlist-btn {
       display: inline-block;
       padding: 12px 20px;
       border-radius: 6px;
       font-size: 16px;
       text-decoration: none;
       margin-right: 12px;
+      margin-top: 8px;
     }
 
     .ar-btn {
@@ -60,6 +63,11 @@
 
     .cart-btn {
       background: #e67e22;
+      color: white;
+    }
+
+    .wishlist-btn {
+      background: #c0392b;
       color: white;
     }
 
@@ -142,7 +150,8 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="rating">★★★★★</div>
 
         <a class="ar-btn" href="${product.usdz}">View in AR</a>
-        <a class="cart-btn" href="cart.html">Add to Cart</a>
+        <a class="cart-btn" href="#" onclick="addToCart(${JSON.stringify(product)}); return false;">Add to Cart</a>
+        <a class="wishlist-btn" href="#" onclick="addToWishlist(${JSON.stringify(product)}); return false;">Wishlist</a>
 
         <div class="description">
           ${product.description || "This is a beautifully crafted piece designed to elevate your home."}
