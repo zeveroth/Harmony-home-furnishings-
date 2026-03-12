@@ -1,48 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Harmony Home Furnishings</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Harmony Home Furnishings</title>
 
-<link rel="stylesheet" href="css/style.css">
-<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
-<script src="js/products.js" defer></script>
-<script src="js/utils.js" defer></script>
-<script src="js/cart.js" defer></script>
+  <!-- Global Theme Styles -->
+  <link rel="stylesheet" href="css/theme.css" />
+
+  <!-- Legacy Styles (optional, if you still want them) -->
+  <link rel="stylesheet" href="css/style.css" />
+
+  <!-- AR Model Viewer -->
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+
+  <!-- Data + Utilities + Cart -->
+  <script src="js/products.js" defer></script>
+  <script src="js/utils.js" defer></script>
+  <script src="js/cart.js" defer></script>
+
+  <!-- Main App Logic (product grid, filters, etc.) -->
+  <script src="js/app.js" defer></script>
 </head>
 
 <body>
 
-<header class="header">
-  <div class="logo">Harmony Home Furnishings</div>
+  <!-- HEADER -->
+  <header>
+    <div class="container" style="display:flex; align-items:center; justify-content:space-between;">
+      
+      <div class="logo">Harmony Home Furnishings</div>
 
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="living-room.html">Living Room</a>
-    <a href="bedroom.html">Bedroom</a>
-    <a href="dining.html">Dining</a>
-    <a href="outdoor.html">Outdoor</a>
-    <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
-  </nav>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="living-room.html">Living Room</a>
+        <a href="bedroom.html">Bedroom</a>
+        <a href="dining.html">Dining</a>
+        <a href="outdoor.html">Outdoor</a>
+        <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+      </nav>
 
-  <div class="search-bar">
-    <input type="text" id="searchInput" placeholder="Search furniture...">
-    <button onclick="performSearch()">Search</button>
-  </div>
-</header>
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search furniture..." />
+        <button onclick="performSearch()">Search</button>
+      </div>
 
-<section class="hero">
-  <h1>Beautiful Furniture. AR Ready.</h1>
-  <p>Preview furniture in your home instantly using AR.</p>
-</section>
+    </div>
+  </header>
 
-<section class="categories">
-  <a href="living-room.html" class="category-card">Living Room</a>
-  <a href="bedroom.html" class="category-card">Bedroom</a>
-  <a href="dining.html" class="category-card">Dining</a>
-  <a href="outdoor.html" class="category-card">Outdoor</a>
-</section>
+  <!-- HERO SECTION -->
+  <section class="hero" style="text-align:center; padding:60px 20px;">
+    <h1>Beautiful Furniture. AR Ready.</h1>
+    <p>Preview furniture in your home instantly using AR.</p>
+  </section>
+
+  <!-- CATEGORY CARDS -->
+  <section class="categories container" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:20px; margin-bottom:40px;">
+    <a href="living-room.html" class="category-card">Living Room</a>
+    <a href="bedroom.html" class="category-card">Bedroom</a>
+    <a href="dining.html" class="category-card">Dining</a>
+    <a href="outdoor.html" class="category-card">Outdoor</a>
+  </section>
+
+  <!-- PRODUCT GRID (optional for homepage) -->
+  <main class="container">
+    <div id="product-grid" class="product-grid"></div>
+  </main>
 
 </body>
 </html>
