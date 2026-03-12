@@ -35,8 +35,8 @@
       border-radius: 12px;
       overflow: hidden;
       box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-      cursor: pointer;
       transition: transform 0.2s;
+      position: relative;
     }
 
     .product-card:hover {
@@ -47,13 +47,14 @@
       width: 100%;
       height: 200px;
       object-fit: cover;
+      cursor: pointer;
     }
 
     .product-info {
       padding: 16px;
     }
 
-    .ar-btn, .cart-btn, .wish-btn {
+    .ar-btn, .cart-btn, .wish-btn, .quick-btn {
       margin-top: 8px;
       margin-right: 6px;
       background: #111;
@@ -73,6 +74,10 @@
 
     .wish-btn {
       background: #c0392b;
+    }
+
+    .quick-btn {
+      background: #3498db;
     }
 
     /* PAGINATION */
@@ -97,6 +102,58 @@
       background: #aaa;
       cursor: default;
     }
+
+    /* QUICK VIEW MODAL */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+    }
+
+    .modal {
+      background: white;
+      width: 90%;
+      max-width: 600px;
+      border-radius: 12px;
+      padding: 20px;
+      position: relative;
+      animation: fadeIn 0.2s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .modal img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .modal h2 {
+      margin-top: 0;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: #c0392b;
+      color: white;
+      border: none;
+      padding: 6px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+    }
   </style>
 </head>
 
@@ -111,7 +168,6 @@
   <!-- FILTER BAR -->
   <div class="filters">
 
-    <!-- PRICE FILTER -->
     <select id="price-filter">
       <option value="all">All Prices</option>
       <option value="0-100">$0 – $100</option>
@@ -120,7 +176,6 @@
       <option value="600-10000">$600+</option>
     </select>
 
-    <!-- RATING FILTER -->
     <select id="rating-filter">
       <option value="all">All Ratings</option>
       <option value="4.5">4.5 ★ & up</option>
@@ -128,13 +183,11 @@
       <option value="4.9">4.9 ★ & up</option>
     </select>
 
-    <!-- AR FILTER -->
     <label>
       <input type="checkbox" id="ar-filter">
       AR‑Only
     </label>
 
-    <!-- SORTING -->
     <select id="sort-filter">
       <option value="default">Sort: Default</option>
       <option value="price-asc">Price: Low → High</option>
@@ -150,6 +203,13 @@
 
   <div id="pagination" class="pagination"></div>
 
+</div>
+
+<!-- QUICK VIEW MODAL -->
+<div id="modal-overlay" class="modal-overlay">
+  <div class="modal" id="modal-content">
+    <button class="close-btn" onclick="closeModal()">Close</button>
+  </div>
 </div>
 
 <div data-include="global-footer.html"></div>
@@ -202,6 +262,30 @@ document.addEventListener("DOMContentLoaded", () => {
     pagination.appendChild(nextBtn);
   }
 
+  function openModal(product) {
+    const modal = document.getElementById("modal-content");
+    const overlay = document.getElementById("modal-overlay");
+
+    modal.innerHTML = `
+      <button class="close-btn" onclick="closeModal()">Close</button>
+      <img src="${product.image}">
+      <h2>${product.name}</h2>
+      <p><strong>$${product.price}</strong></p>
+      <p>★★★★★</p>
+      <p>${product.description || "Beautifully crafted furniture piece."}</p>
+
+      <a class="ar-btn" href="${product.usdz}">View in AR</a>
+      <button class="cart-btn" onclick='addToCart(${JSON.stringify(product)});'>Add to Cart</button>
+      <button class="wish-btn" onclick='addToWishlist(${JSON.stringify(product)});'>Wishlist</button>
+    `;
+
+    overlay.style.display = "flex";
+  }
+
+  window.closeModal = function() {
+    document.getElementById("modal-overlay").style.display = "none";
+  };
+
   function renderProducts(list) {
     grid.innerHTML = "";
 
@@ -216,16 +300,18 @@ document.addEventListener("DOMContentLoaded", () => {
     pageItems.forEach(p => {
       const card = document.createElement("div");
       card.className = "product-card";
-      card.onclick = () => window.location = `product.html?id=${p.id}`;
 
       card.innerHTML = `
-        <img src="${p.image}">
+        <img src="${p.image}" onclick="window.location='product.html?id=${p.id}'">
         <div class="product-info">
           <h3>${p.name}</h3>
           <p>$${p.price}</p>
-          <a class="ar-btn" href="${p.usdz}" onclick="event.stopPropagation();">View in AR</a>
-          <button class="cart-btn" onclick='addToCart(${JSON.stringify(p)}); event.stopPropagation();'>Add to Cart</button>
-          <button class="wish-btn" onclick='addToWishlist(${JSON.stringify(p)}); event.stopPropagation();'>Wishlist</button>
+
+          <button class="quick-btn" onclick='event.stopPropagation(); openModal(${JSON.stringify(p)});'>Quick View</button>
+
+          <a class="ar-btn" href="${p.usdz}" onclick="event.stopPropagation();">AR</a>
+          <button class="cart-btn" onclick='addToCart(${JSON.stringify(p)}); event.stopPropagation();'>Cart</button>
+          <button class="wish-btn" onclick='addToWishlist(${JSON.stringify(p)}); event.stopPropagation();'>Wish</button>
         </div>
       `;
 
@@ -238,25 +324,21 @@ document.addEventListener("DOMContentLoaded", () => {
   function applyFilters() {
     let list = products.filter(p => p.category === cat);
 
-    // PRICE FILTER
     const priceVal = document.getElementById("price-filter").value;
     if (priceVal !== "all") {
       const [min, max] = priceVal.split("-").map(Number);
       list = list.filter(p => p.price >= min && p.price <= max);
     }
 
-    // RATING FILTER
     const ratingVal = document.getElementById("rating-filter").value;
     if (ratingVal !== "all") {
       list = list.filter(p => p.rating >= Number(ratingVal));
     }
 
-    // AR FILTER
     if (document.getElementById("ar-filter").checked) {
       list = list.filter(p => p.usdz && p.usdz.length > 0);
     }
 
-    // SORTING
     const sortVal = document.getElementById("sort-filter").value;
 
     if (sortVal === "price-asc") list.sort((a, b) => a.price - b.price);
@@ -268,7 +350,6 @@ document.addEventListener("DOMContentLoaded", () => {
     renderProducts(list);
   }
 
-  // RESET PAGE WHEN FILTERS CHANGE
   document.getElementById("price-filter").onchange = () => { currentPage = 1; applyFilters(); };
   document.getElementById("rating-filter").onchange = () => { currentPage = 1; applyFilters(); };
   document.getElementById("ar-filter").onchange = () => { currentPage = 1; applyFilters(); };
