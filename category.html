@@ -54,6 +54,7 @@ header{background:#222;color:white;text-align:center;padding:30px;}
   <a href="index.html" style="color:white;">Back Home</a>
 </header>
 
+<!-- ⭐ SORT BAR (only once) -->
 <div class="sort-bar">
   <select id="sort-select">
     <option value="default">Sort By</option>
@@ -64,15 +65,6 @@ header{background:#222;color:white;text-align:center;padding:30px;}
 </div>
 
 <div class="breadcrumb" id="breadcrumb"></div>
-
-<div class="sort-bar">
-  <select id="sort-select">
-    <option value="default">Sort By</option>
-    <option value="price-low">Price: Low to High</option>
-    <option value="price-high">Price: High to Low</option>
-    <option value="rating-high">Rating: High to Low</option>
-  </select>
-</div>
 
 <div class="products" id="product-list"></div>
 
@@ -119,13 +111,13 @@ function renderProducts(list){
   });
 }
 
-// Sorting
+// ⭐ SORTING LOGIC
 document.getElementById("sort-select").addEventListener("change", e => {
   const val = e.target.value;
 
-  if(val === "price-low") filtered.sort((a,b)=>a.price-b.price);
-  if(val === "price-high") filtered.sort((a,b)=>b.price-a.price);
-  if(val === "rating-high") filtered.sort((a,b)=>b.rating-a.rating);
+  if(val === "price-low") filtered.sort((a,b)=>a.price - b.price);
+  if(val === "price-high") filtered.sort((a,b)=>b.price - a.price);
+  if(val === "rating-high") filtered.sort((a,b)=>b.rating - a.rating);
 
   renderProducts(filtered);
 });
