@@ -245,3 +245,25 @@ footer {
   font-size: 16px;
 }
 
+/* ---------------------------------------------
+   MOBILE RESPONSIVE
+--------------------------------------------- */
+@media (max-width: 768px) {
+  .product-detail {
+    flex-direction: column;
+  }
+
+  .product-detail img,
+  .product-detail-info {
+    width: 100%;
+  }
+
+  header nav {
+    display: none; /* optional: hide nav on mobile */
+  }
+
+  .search-bar input {
+    width: 140px;
+  }
+}
+
