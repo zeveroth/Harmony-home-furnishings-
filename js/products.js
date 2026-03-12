@@ -819,3 +819,12 @@ const products = [
     usdz: "models/outdoor/set-01.usdz"
   }
 ];
+
+function searchProducts(query) {
+  query = query.toLowerCase();
+  return products.filter(p =>
+    p.name.toLowerCase().includes(query) ||
+    p.category.toLowerCase().includes(query) ||
+    (p.description && p.description.toLowerCase().includes(query))
+  );
+}
