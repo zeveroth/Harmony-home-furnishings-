@@ -1,96 +1,75 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Living Room - Harmony Home Furnishings</title>
+<title>Living Room Furniture</title>
 
-<link rel="stylesheet" href="css/style.css">
+<style>
+body{font-family:Arial;margin:0;background:#f4f4f4;}
+header{background:#222;color:white;text-align:center;padding:30px;}
+.products{display:flex;flex-wrap:wrap;justify-content:center;padding:20px;}
+.product{
+  background:white;
+  width:260px;
+  margin:15px;
+  box-shadow:0 3px 8px rgba(0,0,0,.15);
+  border-radius:6px;
+  text-align:center;
+  padding-bottom:15px;
+}
+.product img{
+  width:100%;
+  height:200px;
+  object-fit:cover;
+}
+.product button{
+  background:#2e7d32;
+  color:white;
+  padding:10px;
+  border:none;
+  width:100%;
+  cursor:pointer;
+}
+</style>
 
-<!-- AR viewer -->
-<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
-
-<!-- JS files -->
-<script src="js/products.js" defer></script>
-<script src="js/utils.js" defer></script>
-<script src="js/cart.js" defer></script>
 </head>
 
 <body>
 
-<header class="header">
-  <div class="logo">Harmony Home Furnishings</div>
-
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="living-room.html">Living Room</a>
-    <a href="bedroom.html">Bedroom</a>
-    <a href="dining.html">Dining</a>
-    <a href="outdoor.html">Outdoor</a>
-    <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
-  </nav>
+<header>
+  <h1>Living Room Furniture</h1>
+  <a href="index.html" style="color:white;">Back Home</a>
 </header>
 
-<section class="category-page">
-  <h1>Living Room Furniture</h1>
-
-  <!-- FILTER BAR -->
-  <div class="filter-bar">
-    <input type="number" id="minPrice" placeholder="Min Price">
-    <input type="number" id="maxPrice" placeholder="Max Price">
-    <select id="ratingFilter">
-      <option value="">Rating</option>
-      <option value="4">4★ & up</option>
-      <option value="4.5">4.5★ & up</option>
-    </select>
-    <button onclick="applyFilters('living')">Apply</button>
-  </div>
-
-  <!-- PRODUCT GRID -->
-  <div class="products-grid" id="products-grid"></div>
-</section>
-
-<script>
-const grid = document.getElementById("products-grid");
-
-function renderLiving(list) {
-  grid.innerHTML = "";
-
-  list
-    .filter(p => p.category === "living")
-    .forEach(p => {
-      const div = document.createElement("div");
-      div.className = "product";
-
-      div.innerHTML = `
-        <img src="${p.image}" alt="${p.name}">
-        <h3>${p.name}</h3>
-        <p>$${p.price}</p>
-
-        <model-viewer 
-          src="${p.glb}" 
-          ios-src="${p.usdz}" 
-          ar 
-          camera-controls 
-          auto-rotate 
-          style="width:100%;height:300px;">
-        </model-viewer>
-
-        <button onclick="addToCart(${p.id})">Add to Cart</button>
-      `;
-
-      grid.appendChild(div);
-    });
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  renderLiving(products);
-});
-</script>
+<div class="products" id="product-list"></div>
 
 <div class="floating-cart-btn" onclick="window.location.href='cart.html'">
   Cart <span id="cart-count-floating">0</span>
 </div>
+
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+
+<script>
+const category = "living-room";
+const filtered = products.filter(p => p.category === category);
+const container = document.getElementById("product-list");
+
+filtered.forEach(p => {
+  const div = document.createElement("div");
+  div.className = "product";
+  div.innerHTML = `
+    <img src="${p.image}">
+    <h3>${p.name}</h3>
+    <p>$${p.price}</p>
+    <p>⭐ ${p.rating}</p>
+    <model-viewer src="${p.glb}" ios-src="${p.usdz}" ar ar-modes="scene-viewer quick-look" camera-controls style="width:100%;height:200px;"></model-viewer>
+    <button onclick="addToCart(${p.id})">Add to Cart</button>
+  `;
+  container.appendChild(div);
+});
+</script>
+
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
 </body>
 </html>
