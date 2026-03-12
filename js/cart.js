@@ -1,89 +1,131 @@
+// ---------------------------------------------
+// CART SYSTEM
+// ---------------------------------------------
+
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
+// Save cart
 function saveCart() {
   localStorage.setItem("cart", JSON.stringify(cart));
+  updateCartCount();
 }
 
-function addToCart(id) {
-  const product = products.find(p => p.id === id);
-  if (!product) return;
+// Update cart count in header
+function updateCartCount() {
+  const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+  const el = document.getElementById("cart-count");
+  if (el) el.textContent = count;
+}
 
+// Add item to cart
+function addToCart(id) {
   const existing = cart.find(item => item.id === id);
 
   if (existing) {
-    existing.qty += 1;
+    existing.quantity++;
   } else {
-    cart.push({ ...product, qty: 1 });
+    cart.push({ id, quantity: 1 });
   }
 
   saveCart();
-  updateCart();
-  updateCartCount();
+  alert("Added to cart!");
 }
 
-function updateCart() {
-  const container = document.querySelector('.cart-items');
-  const totalEl = document.querySelector('.cart-total');
+// Remove item
+function removeFromCart(id) {
+  cart = cart.filter(item => item.id !== id);
+  saveCart();
+  renderCart();
+}
 
-  if (!container || !totalEl) return;
+// Change quantity
+function changeQuantity(id, amount) {
+  const item = cart.find(i => i.id === id);
+  if (!item) return;
 
-  container.innerHTML = '';
+  item.quantity += amount;
 
-  cart.forEach((p, index) => {
-    const div = document.createElement('div');
-    div.className = 'product';
+  if (item.quantity <= 0) {
+    removeFromCart(id);
+  } else {
+    saveCart();
+    renderCart();
+  }
+}
 
-    div.innerHTML = `
-      <h3>${p.name}</h3>
-      <p>$${p.price} × ${p.qty}</p>
+// ---------------------------------------------
+// RENDER CART PAGE
+// ---------------------------------------------
 
-      <div style="margin:10px 0;">
-        <button onclick="changeQty(${index}, -1)">-</button>
-        <button onclick="changeQty(${index}, 1)">+</button>
+function renderCart() {
+  const container = document.getElementById("cart-items");
+  const summary = document.getElementById("cart-summary");
+  const checkoutBtn = document.getElementById("checkout-btn");
+
+  if (!container) return;
+
+  container.innerHTML = "";
+
+  if (cart.length === 0) {
+    container.innerHTML = "<p>Your cart is empty.</p>";
+    summary.textContent = "";
+    checkoutBtn.style.display = "none";
+    return;
+  }
+
+  let total = 0;
+
+  cart.forEach(item => {
+    const product = products.find(p => p.id === item.id);
+    if (!product) return;
+
+    const itemTotal = product.price * item.quantity;
+    total += itemTotal;
+
+    const row = document.createElement("div");
+    row.style.display = "flex";
+    row.style.alignItems = "center";
+    row.style.justifyContent = "space-between";
+    row.style.marginBottom = "20px";
+    row.style.padding = "20px";
+    row.style.background = "#fff";
+    row.style.borderRadius = "12px";
+    row.style.boxShadow = "0 4px 12px rgba(0,0,0,0.06)";
+
+    row.innerHTML = `
+      <div style="display:flex; align-items:center; gap:20px;">
+        <img src="${product.image}" style="width:100px; height:100px; object-fit:cover; border-radius:8px;">
+        <div>
+          <h3>${product.name}</h3>
+          <p>$${product.price} each</p>
+        </div>
       </div>
 
-      <button onclick="removeItem(${index})">Remove</button>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <button class="btn" style="padding:6px 12px;" onclick="changeQuantity(${item.id}, -1)">-</button>
+        <span style="font-size:18px; width:30px; text-align:center;">${item.quantity}</span>
+        <button class="btn" style="padding:6px 12px;" onclick="changeQuantity(${item.id}, 1)">+</button>
+      </div>
+
+      <div style="font-weight:600;">$${itemTotal}</div>
+
+      <button class="btn" style="background:#b00020;" onclick="removeFromCart(${item.id})">
+        Remove
+      </button>
     `;
 
-    container.appendChild(div);
+    container.appendChild(row);
   });
 
-  const total = cart.reduce((sum, p) => sum + p.price * p.qty, 0);
-  totalEl.innerText = `Total: $${total}`;
+  summary.textContent = `Total: $${total}`;
+  checkoutBtn.style.display = "inline-block";
 }
 
-function changeQty(index, amount) {
-  cart[index].qty += amount;
-
-  if (cart[index].qty <= 0) {
-    cart.splice(index, 1);
-  }
-
-  saveCart();
-  updateCart();
-  updateCartCount();
-}
-
-function removeItem(index) {
-  cart.splice(index, 1);
-  saveCart();
-  updateCart();
-  updateCartCount();
-}
-
-function checkout() {
-  alert('Checkout feature coming soon!');
-}
-
-function updateCartCount() {
-  const countEl = document.getElementById("cart-count");
-  if (!countEl) return;
-
-  const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
-  countEl.innerText = totalQty;
-}
+// ---------------------------------------------
+// INIT
+// ---------------------------------------------
 
 document.addEventListener("DOMContentLoaded", () => {
-  updateCart();
   updateCartCount();
+  renderCart();
 });
