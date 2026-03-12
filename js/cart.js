@@ -8,6 +8,7 @@ let cart = JSON.parse(localStorage.getItem("cart")) || [];
 function saveCart() {
   localStorage.setItem("cart", JSON.stringify(cart));
   updateCartCount();
+  updateFloatingCartCount();
 }
 
 // Update cart count in header
