@@ -13,18 +13,23 @@ function addToCart(product) {
   cart.push(product);
   saveCart(cart);
 
-  // update header counter
+  // update header counter instantly
   const el = document.getElementById("cart-count");
   if (el) el.textContent = cart.length;
 }
-
 
 function removeFromCart(index) {
   const cart = getCart();
   cart.splice(index, 1);
   saveCart(cart);
+
+  const el = document.getElementById("cart-count");
+  if (el) el.textContent = cart.length;
 }
 
 function clearCart() {
   localStorage.removeItem("cart");
+
+  const el = document.getElementById("cart-count");
+  if (el) el.textContent = 0;
 }
