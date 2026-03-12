@@ -123,15 +123,9 @@ function renderCart() {
 }
 
 // ---------------------------------------------
-// INIT
+// FLOATING CART COUNT
 // ---------------------------------------------
 
-document.addEventListener("DOMContentLoaded", () => {
-  updateCartCount();
-  renderCart();
-});
-
-// Update floating cart button count
 function updateFloatingCartCount() {
   const el = document.getElementById("cart-count-floating");
   if (el) {
@@ -140,8 +134,12 @@ function updateFloatingCartCount() {
   }
 }
 
-// Update both counts on load
+// ---------------------------------------------
+// INIT — MERGED INTO ONE CLEAN LISTENER
+// ---------------------------------------------
+
 document.addEventListener("DOMContentLoaded", () => {
   updateCartCount();
   updateFloatingCartCount();
+  renderCart();
 });
