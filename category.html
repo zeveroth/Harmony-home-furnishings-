@@ -48,12 +48,12 @@ body.dark .product{background:#1f1f1f;color:#eee;}
   padding:10px;
   flex-wrap:wrap;
 }
-.sort-bar select,.sort-bar button{
+.sort-bar select{
   padding:8px 10px;
 }
 .breadcrumb{
   text-align:center;
-  margin-top:5px;
+  margin-top:10px;
   color:#555;
 }
 body.dark .breadcrumb{color:#bbb;}
@@ -101,6 +101,7 @@ body.dark .load-more{color:#bbb;}
     </div>
     <div>
       <a href="index.html">Home</a> |
+      <a href="wishlist.html">Wishlist</a> |
       <a href="cart.html">Cart (<span id="cart-count-floating">0</span>)</a>
       <button class="dark-toggle" id="darkToggle">Dark</button>
     </div>
@@ -186,7 +187,7 @@ function renderProducts(list){
       <p>$${p.price}</p>
       <p>⭐ ${p.rating}</p>
       <button onclick="addToCart(${p.id})">Add to Cart</button>
-      <button class="secondary-btn" onclick="viewDetails(${p.id})">Details</button>
+      <button class="secondary-btn" onclick="window.location.href='product.html?id=${p.id}'">Details</button>
       <button class="wishlist-btn" onclick="toggleWishlist(${p.id})">
         ${inWish ? "♥ In Wishlist" : "♡ Add to Wishlist"}
       </button>
@@ -222,11 +223,6 @@ function openAR(glb, usdz){
   } else {
     window.location.href = glb;
   }
-}
-
-// Product details
-function viewDetails(id){
-  window.location.href = `product.html?id=${id}`;
 }
 
 // Infinite scroll
