@@ -1,54 +1,88 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Product Details</title>
-
-  <link rel="stylesheet" href="css/theme.css" />
-  <link rel="stylesheet" href="css/style.css" />
-
-  <!-- AR Support -->
-  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
-
-  <!-- Data + Utilities + Cart -->
-  <script src="js/products.js" defer></script>
-  <script src="js/utils.js" defer></script>
-  <script src="js/cart.js" defer></script>
-
-  <!-- Product Detail Logic -->
-  <script src="js/product.js" defer></script>
+<title>Product Detail</title>
+<style>
+body{font-family:Arial;margin:0;background:#f4f4f4;}
+.container{max-width:900px;margin:0 auto;padding:20px;}
+header{background:#222;color:white;padding:15px;text-align:center;}
+.product-detail{
+  background:white;
+  margin-top:20px;
+  padding:20px;
+  box-shadow:0 3px 8px rgba(0,0,0,.15);
+  border-radius:6px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:20px;
+}
+.product-detail img{
+  width:320px;
+  max-width:100%;
+  border-radius:6px;
+}
+.actions button{
+  display:block;
+  width:100%;
+  margin-top:10px;
+  padding:10px;
+  border:none;
+  cursor:pointer;
+  color:white;
+}
+.add-btn{background:#2e7d32;}
+.ar-btn{background:#1565c0;}
+.back-btn{background:#555;}
+</style>
 </head>
-
 <body>
 
-  <!-- HEADER -->
-  <header>
-    <div class="container" style="display:flex; align-items:center; justify-content:space-between;">
-      <div class="logo">Harmony Home</div>
-      <nav>
-        <a href="index.html">Home</a>
-        <a href="living-room.html">Living Room</a>
-        <a href="bedroom.html">Bedroom</a>
-        <a href="dining.html">Dining</a>
-        <a href="outdoor.html">Outdoor</a>
-        <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
-      </nav>
-    </div>
-  </header>
+<header>
+  <h1>Product Detail</h1>
+</header>
 
-  <!-- PRODUCT DETAIL -->
-  <main class="container">
-    <div id="product-detail" class="product-detail"></div>
+<div class="container">
+  <button class="back-btn" onclick="history.back()">← Back</button>
 
-    <h2 style="margin-top:60px;">You May Also Like</h2>
-<div id="related-carousel" class="carousel-container"></div>
-
-  </main>
-
-<div class="floating-cart-btn" onclick="window.location.href='cart.html'">
-  Cart <span id="cart-count-floating">0</span>
+  <div id="detail" class="product-detail"></div>
 </div>
+
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+<script>
+const params = new URLSearchParams(window.location.search);
+const id = parseInt(params.get("id"),10);
+const product = products.find(p => p.id === id);
+
+function openAR(glb, usdz){
+  if (/iPhone|iPad|iPod/.test(navigator.userAgent)){
+    window.location.href = usdz;
+  } else {
+    window.location.href = glb;
+  }
+}
+
+if(product){
+  const detail = document.getElementById("detail");
+  detail.innerHTML = `
+    <div>
+      <img src="${product.image}">
+    </div>
+    <div>
+      <h2>${product.name}</h2>
+      <p><strong>Price:</strong> $${product.price}</p>
+      <p><strong>Rating:</strong> ⭐ ${product.rating}</p>
+      <p><strong>Category:</strong> ${product.category}</p>
+      <div class="actions">
+        <button class="add-btn" onclick="addToCart(${product.id})">Add to Cart</button>
+        <button class="ar-btn" onclick="openAR('${product.glb}', '${product.usdz}')">View in AR</button>
+      </div>
+    </div>
+  `;
+} else {
+  document.getElementById("detail").innerHTML = "<p>Product not found.</p>";
+}
+</script>
 
 </body>
 </html>
