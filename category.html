@@ -4,6 +4,8 @@
   <title>Shop by Category</title>
   <script src="include-loader.js" defer></script>
   <script src="js/products.js" defer></script>
+  <script src="js/cart.js" defer></script>
+  <script src="js/wishlist.js" defer></script>
 
   <style>
     .product-grid {
@@ -36,15 +38,30 @@
       padding: 16px;
     }
 
-    .ar-btn {
-      margin-top: 10px;
+    .product-info h3 {
+      margin-top: 0;
+    }
+
+    .ar-btn, .cart-btn, .wish-btn {
+      margin-top: 8px;
+      margin-right: 6px;
       background: #111;
       color: white;
-      padding: 10px 14px;
+      padding: 8px 12px;
       border-radius: 6px;
       display: inline-block;
-      font-size: 14px;
+      font-size: 13px;
       text-decoration: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .cart-btn {
+      background: #e67e22;
+    }
+
+    .wish-btn {
+      background: #c0392b;
     }
   </style>
 </head>
@@ -65,7 +82,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const cat = params.get("cat");
 
   const filtered = products.filter(p => p.category === cat);
-
   const grid = document.getElementById("product-grid");
 
   filtered.forEach(p => {
@@ -78,7 +94,9 @@ document.addEventListener("DOMContentLoaded", () => {
       <div class="product-info">
         <h3>${p.name}</h3>
         <p>$${p.price}</p>
-        <a class="ar-btn" href="${p.usdz}">View in AR</a>
+        <a class="ar-btn" href="${p.usdz}" onclick="event.stopPropagation();">View in AR</a>
+        <button class="cart-btn" onclick="addToCart(${JSON.stringify(p)}); event.stopPropagation();">Add to Cart</button>
+        <button class="wish-btn" onclick="addToWishlist(${JSON.stringify(p)}); event.stopPropagation();">Wishlist</button>
       </div>
     `;
 
