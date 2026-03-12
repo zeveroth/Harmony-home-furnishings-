@@ -129,3 +129,18 @@ document.addEventListener("DOMContentLoaded", () => {
   updateCartCount();
   renderCart();
 });
+
+// Update floating cart button count
+function updateFloatingCartCount() {
+  const el = document.getElementById("cart-count-floating");
+  if (el) {
+    const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+    el.textContent = count;
+  }
+}
+
+// Update both counts on load
+document.addEventListener("DOMContentLoaded", () => {
+  updateCartCount();
+  updateFloatingCartCount();
+});
