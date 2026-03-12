@@ -61,25 +61,22 @@ function openAR(glb, usdz) {
 }
 
 // ---------------------------------------------
-// RELATED PRODUCTS
-// ---------------------------------------------
-
-function renderRelatedProducts(product) {
-  const container = document.getElementById("related-products");
+// function renderRelatedProducts(product) {
+  const container = document.getElementById("related-carousel");
 
   const related = products
     .filter(p => p.category === product.category && p.id !== product.id)
-    .slice(0, 4);
+    .slice(0, 10); // show up to 10 items in carousel
 
   related.forEach(item => {
     const card = document.createElement("div");
-    card.className = "product-card";
+    card.className = "carousel-item";
     card.onclick = () => window.location.href = `product.html?id=${item.id}`;
 
     card.innerHTML = `
       <img src="${item.image}" alt="${item.name}">
-      <div class="product-info">
-        <h3>${item.name}</h3>
+      <div class="info">
+        <h4>${item.name}</h4>
         <div class="price">$${item.price}</div>
         <div class="rating">⭐ ${item.rating}</div>
       </div>
@@ -88,3 +85,4 @@ function renderRelatedProducts(product) {
     container.appendChild(card);
   });
 }
+
