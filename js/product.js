@@ -61,7 +61,10 @@ function openAR(glb, usdz) {
 }
 
 // ---------------------------------------------
-// function renderRelatedProducts(product) {
+// RELATED PRODUCTS — CAROUSEL VERSION
+// ---------------------------------------------
+
+function renderRelatedProducts(product) {
   const container = document.getElementById("related-carousel");
 
   const related = products
@@ -85,4 +88,3 @@ function openAR(glb, usdz) {
     container.appendChild(card);
   });
 }
-
