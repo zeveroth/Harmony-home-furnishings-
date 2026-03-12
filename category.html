@@ -53,10 +53,6 @@
       padding: 16px;
     }
 
-    .product-info h3 {
-      margin-top: 0;
-    }
-
     .ar-btn, .cart-btn, .wish-btn {
       margin-top: 8px;
       margin-right: 6px;
@@ -77,6 +73,29 @@
 
     .wish-btn {
       background: #c0392b;
+    }
+
+    /* PAGINATION */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      margin-top: 30px;
+      gap: 10px;
+    }
+
+    .pagination button {
+      padding: 10px 16px;
+      font-size: 16px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      background: #111;
+      color: white;
+    }
+
+    .pagination button.disabled {
+      background: #aaa;
+      cursor: default;
     }
   </style>
 </head>
@@ -114,6 +133,8 @@
 
   <div id="product-grid" class="product-grid"></div>
 
+  <div id="pagination" class="pagination"></div>
+
 </div>
 
 <div data-include="global-footer.html"></div>
@@ -127,20 +148,59 @@ document.addEventListener("DOMContentLoaded", () => {
     cat.charAt(0).toUpperCase() + cat.slice(1);
 
   const grid = document.getElementById("product-grid");
+  const pagination = document.getElementById("pagination");
 
-  // INITIAL FILTERED LIST
   let filtered = products.filter(p => p.category === cat);
 
-  // RENDER FUNCTION
+  let currentPage = 1;
+  const perPage = 8;
+
+  function paginate(list) {
+    const start = (currentPage - 1) * perPage;
+    return list.slice(start, start + perPage);
+  }
+
+  function renderPagination(list) {
+    pagination.innerHTML = "";
+
+    const totalPages = Math.ceil(list.length / perPage);
+
+    const prevBtn = document.createElement("button");
+    prevBtn.textContent = "Previous";
+    prevBtn.className = currentPage === 1 ? "disabled" : "";
+    prevBtn.onclick = () => {
+      if (currentPage > 1) {
+        currentPage--;
+        applyFilters();
+      }
+    };
+
+    const nextBtn = document.createElement("button");
+    nextBtn.textContent = "Next";
+    nextBtn.className = currentPage === totalPages ? "disabled" : "";
+    nextBtn.onclick = () => {
+      if (currentPage < totalPages) {
+        currentPage++;
+        applyFilters();
+      }
+    };
+
+    pagination.appendChild(prevBtn);
+    pagination.appendChild(nextBtn);
+  }
+
   function renderProducts(list) {
     grid.innerHTML = "";
 
     if (list.length === 0) {
       grid.innerHTML = "<p>No products match these filters.</p>";
+      pagination.innerHTML = "";
       return;
     }
 
-    list.forEach(p => {
+    const pageItems = paginate(list);
+
+    pageItems.forEach(p => {
       const card = document.createElement("div");
       card.className = "product-card";
       card.onclick = () => window.location = `product.html?id=${p.id}`;
@@ -158,26 +218,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
       grid.appendChild(card);
     });
+
+    renderPagination(list);
   }
 
-  // APPLY FILTERS
   function applyFilters() {
     let list = products.filter(p => p.category === cat);
 
-    // PRICE FILTER
     const priceVal = document.getElementById("price-filter").value;
     if (priceVal !== "all") {
       const [min, max] = priceVal.split("-").map(Number);
       list = list.filter(p => p.price >= min && p.price <= max);
     }
 
-    // RATING FILTER
     const ratingVal = document.getElementById("rating-filter").value;
     if (ratingVal !== "all") {
       list = list.filter(p => p.rating >= Number(ratingVal));
     }
 
-    // AR FILTER
     if (document.getElementById("ar-filter").checked) {
       list = list.filter(p => p.usdz && p.usdz.length > 0);
     }
@@ -185,12 +243,10 @@ document.addEventListener("DOMContentLoaded", () => {
     renderProducts(list);
   }
 
-  // EVENT LISTENERS
-  document.getElementById("price-filter").onchange = applyFilters;
-  document.getElementById("rating-filter").onchange = applyFilters;
-  document.getElementById("ar-filter").onchange = applyFilters;
+  document.getElementById("price-filter").onchange = () => { currentPage = 1; applyFilters(); };
+  document.getElementById("rating-filter").onchange = () => { currentPage = 1; applyFilters(); };
+  document.getElementById("ar-filter").onchange = () => { currentPage = 1; applyFilters(); };
 
-  // INITIAL RENDER
   renderProducts(filtered);
 });
 </script>
