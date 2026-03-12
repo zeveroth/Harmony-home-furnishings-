@@ -1,88 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Product Detail</title>
-<style>
-body{font-family:Arial;margin:0;background:#f4f4f4;}
-.container{max-width:900px;margin:0 auto;padding:20px;}
-header{background:#222;color:white;padding:15px;text-align:center;}
-.product-detail{
-  background:white;
-  margin-top:20px;
-  padding:20px;
-  box-shadow:0 3px 8px rgba(0,0,0,.15);
-  border-radius:6px;
-  display:flex;
-  flex-wrap:wrap;
-  gap:20px;
-}
-.product-detail img{
-  width:320px;
-  max-width:100%;
-  border-radius:6px;
-}
-.actions button{
-  display:block;
-  width:100%;
-  margin-top:10px;
-  padding:10px;
-  border:none;
-  cursor:pointer;
-  color:white;
-}
-.add-btn{background:#2e7d32;}
-.ar-btn{background:#1565c0;}
-.back-btn{background:#555;}
-</style>
+  <title>Product Details</title>
+  <script src="include-loader.js" defer></script>
 </head>
+
 <body>
 
-<header>
-  <h1>Product Detail</h1>
-</header>
+<div data-include="global-header.html"></div>
 
-<div class="container">
-  <button class="back-btn" onclick="history.back()">← Back</button>
+<h2>Product Details</h2>
 
-  <div id="detail" class="product-detail"></div>
-</div>
-
-<script src="js/products.js"></script>
-<script src="js/cart.js"></script>
-<script>
-const params = new URLSearchParams(window.location.search);
-const id = parseInt(params.get("id"),10);
-const product = products.find(p => p.id === id);
-
-function openAR(glb, usdz){
-  if (/iPhone|iPad|iPod/.test(navigator.userAgent)){
-    window.location.href = usdz;
-  } else {
-    window.location.href = glb;
-  }
-}
-
-if(product){
-  const detail = document.getElementById("detail");
-  detail.innerHTML = `
-    <div>
-      <img src="${product.image}">
-    </div>
-    <div>
-      <h2>${product.name}</h2>
-      <p><strong>Price:</strong> $${product.price}</p>
-      <p><strong>Rating:</strong> ⭐ ${product.rating}</p>
-      <p><strong>Category:</strong> ${product.category}</p>
-      <div class="actions">
-        <button class="add-btn" onclick="addToCart(${product.id})">Add to Cart</button>
-        <button class="ar-btn" onclick="openAR('${product.glb}', '${product.usdz}')">View in AR</button>
-      </div>
-    </div>
-  `;
-} else {
-  document.getElementById("detail").innerHTML = "<p>Product not found.</p>";
-}
-</script>
+<div data-include="global-footer.html"></div>
 
 </body>
 </html>
