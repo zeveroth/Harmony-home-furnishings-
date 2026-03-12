@@ -11,25 +11,21 @@ function saveWishlist(list) {
 function addToWishlist(product) {
   const list = getWishlist();
 
-  if (!list.find(item => item.id === product.id)) {
-    list.push(product);
-    saveWishlist(list);
-  }
-
-  // update header counter
-  const el = document.getElementById("wishlist-count");
-  if (el) el.textContent = list.length;
-}
-
-
   // prevent duplicates
   if (!list.find(item => item.id === product.id)) {
     list.push(product);
     saveWishlist(list);
   }
+
+  // update header counter instantly
+  const el = document.getElementById("wishlist-count");
+  if (el) el.textContent = list.length;
 }
 
 function removeFromWishlist(id) {
   const list = getWishlist().filter(item => item.id !== id);
   saveWishlist(list);
+
+  const el = document.getElementById("wishlist-count");
+  if (el) el.textContent = list.length;
 }
