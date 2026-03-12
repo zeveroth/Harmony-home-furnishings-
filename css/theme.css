@@ -301,3 +301,52 @@ footer {
   font-weight: 700;
 }
 
+/* ---------------------------------------------
+   YOU MAY ALSO LIKE — CAROUSEL
+--------------------------------------------- */
+.carousel-container {
+  margin-top: 40px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  display: flex;
+  gap: 20px;
+  padding-bottom: 10px;
+}
+
+.carousel-container::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-item {
+  min-width: 240px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  scroll-snap-align: start;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.carousel-item:hover {
+  transform: translateY(-4px);
+}
+
+.carousel-item img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 12px 12px 0 0;
+}
+
+.carousel-item .info {
+  padding: 12px;
+}
+
+.carousel-item .info h4 {
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.carousel-item .info .price {
+  font-weight: 700;
+}
