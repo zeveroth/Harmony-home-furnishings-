@@ -68,19 +68,10 @@
       cursor: pointer;
     }
 
-    .cart-btn {
-      background: #e67e22;
-    }
+    .cart-btn { background: #e67e22; }
+    .wish-btn { background: #c0392b; }
+    .quick-btn { background: #3498db; }
 
-    .wish-btn {
-      background: #c0392b;
-    }
-
-    .quick-btn {
-      background: #3498db;
-    }
-
-    /* PAGINATION */
     .pagination {
       display: flex;
       justify-content: center;
@@ -103,7 +94,6 @@
       cursor: default;
     }
 
-    /* QUICK VIEW MODAL */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -138,9 +128,7 @@
       margin-bottom: 20px;
     }
 
-    .modal h2 {
-      margin-top: 0;
-    }
+    .modal h2 { margin-top: 0; }
 
     .close-btn {
       position: absolute;
@@ -165,7 +153,6 @@
 
   <h2 id="category-title">Category</h2>
 
-  <!-- FILTER BAR -->
   <div class="filters">
 
     <select id="price-filter">
@@ -200,12 +187,10 @@
   </div>
 
   <div id="product-grid" class="product-grid"></div>
-
   <div id="pagination" class="pagination"></div>
 
 </div>
 
-<!-- QUICK VIEW MODAL -->
 <div id="modal-overlay" class="modal-overlay">
   <div class="modal" id="modal-content">
     <button class="close-btn" onclick="closeModal()">Close</button>
@@ -216,11 +201,22 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
+
   const params = new URLSearchParams(window.location.search);
   const cat = params.get("cat");
 
+  // ⭐ CATEGORY NORMALIZATION FIX
+  const categoryMap = {
+    "living-room": "living",
+    "bed-room": "bedroom",
+    "dining-room": "dining",
+    "out-door": "outdoor"
+  };
+
+  const normalizedCat = categoryMap[cat] || cat;
+
   document.getElementById("category-title").textContent =
-    cat.charAt(0).toUpperCase() + cat.slice(1);
+    normalizedCat.charAt(0).toUpperCase() + normalizedCat.slice(1);
 
   const grid = document.getElementById("product-grid");
   const pagination = document.getElementById("pagination");
@@ -271,7 +267,6 @@ document.addEventListener("DOMContentLoaded", () => {
       <img src="${product.image}">
       <h2>${product.name}</h2>
       <p><strong>$${product.price}</strong></p>
-      <p>★★★★★</p>
       <p>${product.description || "Beautifully crafted furniture piece."}</p>
 
       <a class="ar-btn" href="${product.usdz}">View in AR</a>
@@ -322,7 +317,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function applyFilters() {
-    let list = products.filter(p => p.category === cat);
+    let list = products.filter(p => p.category === normalizedCat);
 
     const priceVal = document.getElementById("price-filter").value;
     if (priceVal !== "all") {
