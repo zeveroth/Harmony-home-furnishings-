@@ -15,8 +15,8 @@ const products = [
     height: 35,
     depth: 36,
     sku: "LFMF-HILL-84",
-    usdz: "models/living/sofa1.usdz",
-    glb: "models/living/sofa1.glb"
+    usdz: "models/living-room/sofa1.usdz",
+    glb: "models/living-room/sofa1.glb"
   },
   {
     id: 2,
@@ -31,8 +31,8 @@ const products = [
     height: 18,
     depth: 24,
     sku: "STLS-BEN-48",
-    usdz: "models/living/coffee1.usdz",
-    glb: "models/living/coffee1.glb"
+    usdz: "models/living-room/coffee1.usdz",
+    glb: "models/living-room/coffee1.glb"
   },
   {
     id: 3,
@@ -47,8 +47,8 @@ const products = [
     height: 28,
     depth: 16,
     sku: "GO-ALDER-58",
-    usdz: "models/living/tv1.usdz",
-    glb: "models/living/tv1.glb"
+    usdz: "models/living-room/tv1.usdz",
+    glb: "models/living-room/tv1.glb"
   },
   {
     id: 4,
@@ -63,8 +63,8 @@ const products = [
     height: 24,
     depth: 22,
     sku: "TAD-HILL-22",
-    usdz: "models/living/end1.usdz",
-    glb: "models/living/end1.glb"
+    usdz: "models/living-room/end1.usdz",
+    glb: "models/living-room/end1.glb"
   },
   {
     id: 5,
@@ -79,8 +79,8 @@ const products = [
     height: 72,
     depth: 14,
     sku: "UR-BEN-72",
-    usdz: "models/living/shelf1.usdz",
-    glb: "models/living/shelf1.glb"
+    usdz: "models/living-room/shelf1.usdz",
+    glb: "models/living-room/shelf1.glb"
   },
   {
     id: 6,
@@ -95,8 +95,8 @@ const products = [
     height: 34,
     depth: 30,
     sku: "FS-KAI-32",
-    usdz: "models/living/chair1.usdz",
-    glb: "models/living/chair1.glb"
+    usdz: "models/living-room/chair1.usdz",
+    glb: "models/living-room/chair1.glb"
   },
   {
     id: 7,
@@ -111,8 +111,8 @@ const products = [
     height: 30,
     depth: 14,
     sku: "TP-HILL-48",
-    usdz: "models/living/console1.usdz",
-    glb: "models/living/console1.glb"
+    usdz: "models/living-room/console1.usdz",
+    glb: "models/living-room/console1.glb"
   },
   {
     id: 8,
@@ -127,8 +127,8 @@ const products = [
     height: 18,
     depth: 18,
     sku: "LM-BEN-38",
-    usdz: "models/living/trunk1.usdz",
-    glb: "models/living/trunk1.glb"
+    usdz: "models/living-room/trunk1.usdz",
+    glb: "models/living-room/trunk1.glb"
   },
   {
     id: 9,
@@ -143,8 +143,8 @@ const products = [
     height: 60,
     depth: 12,
     sku: "MR-IND-60",
-    usdz: "models/living/lamp1.usdz",
-    glb: "models/living/lamp1.glb"
+    usdz: "models/living-room/lamp1.usdz",
+    glb: "models/living-room/lamp1.glb"
   },
   {
     id: 10,
@@ -159,8 +159,8 @@ const products = [
     height: 10,
     depth: 8,
     sku: "STLS-IND-24",
-    usdz: "models/living/wallshelf1.usdz",
-    glb: "models/living/wallshelf1.glb"
+    usdz: "models/living-room/wallshelf1.usdz",
+    glb: "models/living-room/wallshelf1.glb"
   },
 
   // =========================
@@ -432,4 +432,5 @@ const products = [
     brand: "Three Posts™",
     category: "dining",
     price: 899.99,
-    image: "https://images.wayfair.com/cab
+    image: "https://images.wayfair.com/cabinet-hillsboro-display.jpg",
+    description: "Tall display cabinet with glass doors, interior shelves,
