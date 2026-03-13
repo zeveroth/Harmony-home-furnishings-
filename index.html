@@ -4,6 +4,7 @@
   <title>Harmony Home Furnishings</title>
   <script src="include-loader.js" defer></script>
   <link rel="stylesheet" href="css/styles.css">
+
   <style>
     .hero {
       height: 420px;
@@ -77,29 +78,37 @@
 <section class="hero">
   <h1>Find Your Harmony</h1>
   <p>Beautiful furniture. Modern AR previews. Delivered to your home.</p>
-  <a href="category.html" class="cta-btn">Shop Now</a>
+
+  <!-- FIXED: Shop Now now loads Living Room -->
+  <a href="category.html?cat=living-room" class="cta-btn">Shop Now</a>
 </section>
 
 <section class="category-grid">
-  <div class="category-card" onclick="window.location='category.html?cat=living'">
+
+  <!-- FIXED: living-room -->
+  <div class="category-card" onclick="window.location='category.html?cat=living-room'">
     <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?q=80&w=2000">
     <h3>Living Room</h3>
   </div>
 
-  <div class="category-card" onclick="window.location='category.html?cat=bedroom'">
+  <!-- FIXED: bed-room -->
+  <div class="category-card" onclick="window.location='category.html?cat=bed-room'">
     <img src="https://images.unsplash.com/photo-1615874959474-d609969a20ed?q=80&w=2000">
     <h3>Bedroom</h3>
   </div>
 
-  <div class="category-card" onclick="window.location='category.html?cat=dining'">
+  <!-- FIXED: dining-room -->
+  <div class="category-card" onclick="window.location='category.html?cat=dining-room'">
     <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2000">
     <h3>Dining</h3>
   </div>
 
-  <div class="category-card" onclick="window.location='category.html?cat=decor'">
+  <!-- FIXED: décor mapped to living-room (no décor category exists) -->
+  <div class="category-card" onclick="window.location='category.html?cat=living-room'">
     <img src="https://images.unsplash.com/photo-1503602642458-232111445657?q=80&w=2000">
     <h3>Décor</h3>
   </div>
+
 </section>
 
 <div data-include="global-footer.html"></div>
