@@ -1,7 +1,3 @@
-// ---------------------------------------------
-// PRODUCT DETAIL PAGE LOGIC
-// ---------------------------------------------
-
 document.addEventListener("DOMContentLoaded", () => {
   const params = new URLSearchParams(window.location.search);
   const id = parseInt(params.get("id"));
@@ -17,10 +13,9 @@ document.addEventListener("DOMContentLoaded", () => {
   renderRelatedProducts(product);
 });
 
-// ---------------------------------------------
-// RENDER MAIN PRODUCT
-// ---------------------------------------------
-
+/* ============================
+   MAIN PRODUCT RENDER
+============================ */
 function renderProductDetail(product) {
   const container = document.getElementById("product-detail");
 
@@ -32,57 +27,33 @@ function renderProductDetail(product) {
       <div class="price">$${product.price}</div>
       <div class="rating">⭐ ${product.rating}</div>
 
-      <p style="margin-top:20px;">
-        This premium piece is crafted with high‑quality materials and designed to elevate your home.
-        Perfect for modern, minimalist, or cozy interiors.
-      </p>
+      <p style="margin-top:20px;">${product.description}</p>
 
       <button class="btn" onclick="addToCart(${product.id})">Add to Cart</button>
-
-      <button class="btn ar-button" onclick="openAR('${product.glb}', '${product.usdz}')">
-        View in AR
-      </button>
     </div>
   `;
 }
 
-// ---------------------------------------------
-// AR BUTTON HANDLING
-// ---------------------------------------------
-
-function openAR(glb, usdz) {
-  const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-
-  if (isIOS) {
-    window.location.href = usdz;
-  } else {
-    window.location.href = glb;
-  }
-}
-
-// ---------------------------------------------
-// RELATED PRODUCTS — CAROUSEL VERSION
-// ---------------------------------------------
-
+/* ============================
+   RELATED PRODUCTS
+============================ */
 function renderRelatedProducts(product) {
   const container = document.getElementById("related-carousel");
 
   const related = products
     .filter(p => p.category === product.category && p.id !== product.id)
-    .slice(0, 10); // show up to 10 items in carousel
+    .slice(0, 10);
 
   related.forEach(item => {
     const card = document.createElement("div");
     card.className = "carousel-item";
-    card.onclick = () => window.location.href = `product.html?id=${item.id}`;
+    card.onclick = () =>
+      window.location.href = `/Harmony-home-furnishings-/product.html?id=${item.id}`;
 
     card.innerHTML = `
       <img src="${item.image}" alt="${item.name}">
-      <div class="info">
-        <h4>${item.name}</h4>
-        <div class="price">$${item.price}</div>
-        <div class="rating">⭐ ${item.rating}</div>
-      </div>
+      <h4>${item.name}</h4>
+      <div class="price">$${item.price}</div>
     `;
 
     container.appendChild(card);
