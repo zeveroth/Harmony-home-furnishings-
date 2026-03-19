@@ -1,35 +1,63 @@
-// CART SYSTEM — stores items in localStorage
+/* ============================
+   CART SYSTEM (Harmony 2.0)
+============================ */
 
+const CART_KEY = "harmony_cart";
+
+/* Load cart from localStorage */
 function getCart() {
-  return JSON.parse(localStorage.getItem("cart") || "[]");
+  return JSON.parse(localStorage.getItem(CART_KEY)) || [];
 }
 
+/* Save cart */
 function saveCart(cart) {
-  localStorage.setItem("cart", JSON.stringify(cart));
+  localStorage.setItem(CART_KEY, JSON.stringify(cart));
+  updateCartCount();
 }
 
-function addToCart(product) {
+/* Add product to cart */
+function addToCart(id) {
   const cart = getCart();
-  cart.push(product);
-  saveCart(cart);
+  const item = cart.find(p => p.id === id);
 
-  // update header counter instantly
-  const el = document.getElementById("cart-count");
-  if (el) el.textContent = cart.length;
+  if (item) {
+    item.qty += 1;
+  } else {
+    cart.push({ id, qty: 1 });
+  }
+
+  saveCart(cart);
+  alert("Added to cart!");
 }
 
-function removeFromCart(index) {
+/* Remove product */
+function removeFromCart(id) {
+  let cart = getCart();
+  cart = cart.filter(item => item.id !== id);
+  saveCart(cart);
+}
+
+/* Update quantity */
+function updateQty(id, qty) {
   const cart = getCart();
-  cart.splice(index, 1);
-  saveCart(cart);
+  const item = cart.find(p => p.id === id);
 
-  const el = document.getElementById("cart-count");
-  if (el) el.textContent = cart.length;
+  if (item) {
+    item.qty = qty;
+    saveCart(cart);
+  }
 }
 
-function clearCart() {
-  localStorage.removeItem("cart");
+/* Mini-cart counter in header */
+function updateCartCount() {
+  const cart = getCart();
+  const count = cart.reduce((sum, item) => sum + item.qty, 0);
 
-  const el = document.getElementById("cart-count");
-  if (el) el.textContent = 0;
+  const counter = document.querySelector(".cart-icon");
+  if (counter) {
+    counter.textContent = `🛒 (${count})`;
+  }
 }
+
+/* Initialize counter on page load */
+document.addEventListener("DOMContentLoaded", updateCartCount);
