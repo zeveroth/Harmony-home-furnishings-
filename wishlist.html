@@ -1,100 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>Your Wishlist</title>
-  <script src="include-loader.js" defer></script>
-  <script src="js/products.js" defer></script>
-  <script src="js/wishlist.js" defer></script>
 
-  <style>
-    .wishlist-container {
-      padding: 40px;
-    }
+  <link rel="stylesheet" href="/Harmony-home-furnishings-/css/styles.css">
 
-    .wishlist-item {
-      display: flex;
-      gap: 20px;
-      margin-bottom: 24px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid #ddd;
-    }
-
-    .wishlist-item img {
-      width: 140px;
-      height: 140px;
-      object-fit: cover;
-      border-radius: 10px;
-    }
-
-    .wishlist-info h3 {
-      margin: 0;
-    }
-
-    .remove-btn {
-      background: #c0392b;
-      color: white;
-      padding: 8px 14px;
-      border-radius: 6px;
-      text-decoration: none;
-      font-size: 14px;
-      display: inline-block;
-      margin-top: 10px;
-    }
-
-    .view-btn {
-      background: #111;
-      color: white;
-      padding: 8px 14px;
-      border-radius: 6px;
-      text-decoration: none;
-      font-size: 14px;
-      display: inline-block;
-      margin-top: 10px;
-      margin-right: 10px;
-    }
-  </style>
+  <script src="/Harmony-home-furnishings-/js/products.js" defer></script>
+  <script src="/Harmony-home-furnishings-/js/wishlist.js" defer></script>
+  <script src="/Harmony-home-furnishings-/js/include-loader.js" defer></script>
+  <script src="/Harmony-home-furnishings-/js/render-wishlist.js" defer></script>
 </head>
 
 <body>
 
-<div data-include="global-header.html"></div>
+  <div data-include="global-header.html"></div>
 
-<div class="wishlist-container">
-  <h2>Your Wishlist</h2>
-  <div id="wishlist-items"></div>
-</div>
+  <section class="wishlist-section">
+    <div class="container">
+      <h1>Your Wishlist</h1>
 
-<div data-include="global-footer.html"></div>
+      <div id="wishlist-items"></div>
+    </div>
+  </section>
 
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const list = getWishlist();
-  const container = document.getElementById("wishlist-items");
-
-  if (list.length === 0) {
-    container.innerHTML = "<p>Your wishlist is empty.</p>";
-    return;
-  }
-
-  list.forEach(item => {
-    const div = document.createElement("div");
-    div.className = "wishlist-item";
-
-    div.innerHTML = `
-      <img src="${item.image}">
-      <div class="wishlist-info">
-        <h3>${item.name}</h3>
-        <p>$${item.price}</p>
-
-        <a class="view-btn" href="product.html?id=${item.id}">View Product</a>
-        <a class="remove-btn" href="#" onclick="removeFromWishlist(${item.id}); location.reload();">Remove</a>
-      </div>
-    `;
-
-    container.appendChild(div);
-  });
-});
-</script>
+  <div data-include="global-footer.html"></div>
 
 </body>
 </html>
