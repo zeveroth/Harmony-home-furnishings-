@@ -1,84 +1,20 @@
-<header class="global-header">
-  <div class="header-left">
-    <a href="index.html" class="logo-link">
-      <img src="harmony-logo.jpg" alt="Harmony Home Furnishings Logo" class="logo-img">
-    </a>
-  </div>
+<header class="site-header">
+  <div class="container header-flex">
 
-  <div class="header-center">
-    <input
-      type="text"
-      class="search-bar"
-      placeholder="Search furniture, décor, and more..."
-      onkeydown="if(event.key==='Enter'){window.location='search.html?q='+this.value;}"
-    >
-  </div>
-
-  <div class="header-right">
-    <a href="wishlist.html" class="header-icon">
-      ❤️ <span id="wishlist-count" class="count-badge">0</span>
+    <a href="/Harmony-home-furnishings-/" class="logo">
+      Harmony Home Furnishings
     </a>
 
-    <a href="cart.html" class="header-icon">
-      🛒 <span id="cart-count" class="count-badge">0</span>
-    </a>
+    <nav class="nav-links">
+      <a href="/Harmony-home-furnishings-/category.html?cat=living">Living</a>
+      <a href="/Harmony-home-furnishings-/category.html?cat=bedroom">Bedroom</a>
+      <a href="/Harmony-home-furnishings-/category.html?cat=dining">Dining</a>
+    </nav>
+
+    <div class="header-actions">
+      <a href="/Harmony-home-furnishings-/cart.html" class="cart-icon">🛒</a>
+      <a href="/Harmony-home-furnishings-/wishlist.html" class="wishlist-icon">❤️</a>
+    </div>
+
   </div>
 </header>
-
-<style>
-  .global-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 14px 20px;
-    border-bottom: 1px solid #ddd;
-    background: #fff;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-  }
-
-  .logo-img {
-    height: 56px;
-    width: auto;
-  }
-
-  .search-bar {
-    width: 420px;
-    max-width: 70vw;
-    padding: 10px 14px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    font-size: 16px;
-  }
-
-  .header-right .header-icon {
-    margin-left: 18px;
-    font-size: 22px;
-    text-decoration: none;
-    color: #333;
-    position: relative;
-  }
-
-  .count-badge {
-    background: #e74c3c;
-    color: white;
-    padding: 2px 8px;
-    border-radius: 10px;
-    font-size: 12px;
-    margin-left: 4px;
-  }
-</style>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-  const wishlist = JSON.parse(localStorage.getItem("wishlist") || "[]");
-
-  const cartEl = document.getElementById("cart-count");
-  const wishEl = document.getElementById("wishlist-count");
-
-  if (cartEl) cartEl.textContent = cart.length;
-  if (wishEl) wishEl.textContent = wishlist.length;
-});
-</script>
