@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const html = await response.text();
       el.innerHTML = html;
     } catch (err) {
-      el.innerHTML = "<p>Include failed to load.</p>";
+      el.innerHTML = "<p>Failed to load include.</p>";
     }
   });
 });
