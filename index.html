@@ -1,117 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>Harmony Home Furnishings</title>
-  <script src="include-loader.js" defer></script>
-  <link rel="stylesheet" href="css/styles.css">
-
-  <style>
-    .hero {
-      height: 420px;
-      background: url('https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=2000') center/cover no-repeat;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding-left: 60px;
-      color: white;
-      text-shadow: 0 2px 6px rgba(0,0,0,0.4);
-    }
-
-    .hero h1 {
-      font-size: 52px;
-      margin: 0;
-    }
-
-    .hero p {
-      font-size: 20px;
-      margin: 12px 0 24px;
-    }
-
-    .hero .cta-btn {
-      background: #111;
-      color: white;
-      padding: 14px 26px;
-      border-radius: 6px;
-      font-size: 18px;
-      text-decoration: none;
-      display: inline-block;
-    }
-
-    .category-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 24px;
-      padding: 40px;
-    }
-
-    .category-card {
-      border-radius: 12px;
-      overflow: hidden;
-      cursor: pointer;
-      background: #fff;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-      transition: transform 0.2s;
-    }
-
-    .category-card:hover {
-      transform: translateY(-4px);
-    }
-
-    .category-card img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-    }
-
-    .category-card h3 {
-      padding: 16px;
-      margin: 0;
-      font-size: 20px;
-    }
-  </style>
+  <link rel="stylesheet" href="/Harmony-home-furnishings-/css/styles.css">
+  <script src="/Harmony-home-furnishings-/js/include-loader.js" defer></script>
 </head>
 
 <body>
 
-<div data-include="global-header.html"></div>
+  <div data-include="global-header.html"></div>
 
-<section class="hero">
-  <h1>Find Your Harmony</h1>
-  <p>Beautiful furniture. Modern AR previews. Delivered to your home.</p>
+  <section class="hero">
+    <h1>Harmony Home Furnishings</h1>
+    <p>Rustic Industrial Farmhouse Furniture</p>
+  </section>
 
-  <!-- FIXED: Shop Now now loads correctly -->
-  <a href="Harmony-home-furnishings-/category.html?cat=living-room" class="cta-btn">Shop Now</a>
-</section>
+  <section class="categories">
+    <h2>Shop by Category</h2>
 
-<section class="category-grid">
+    <div class="category-grid">
+      <a href="/Harmony-home-furnishings-/category.html?cat=living" class="category-card">
+        <h3>Living Room</h3>
+      </a>
 
-  <!-- LIVING ROOM -->
-  <div class="category-card" onclick="window.location='Harmony-home-furnishings-/category.html?cat=living-room'">
-    <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?q=80&w=2000">
-    <h3>Living Room</h3>
-  </div>
+      <a href="/Harmony-home-furnishings-/category.html?cat=bedroom" class="category-card">
+        <h3>Bedroom</h3>
+      </a>
 
-  <!-- BEDROOM -->
-  <div class="category-card" onclick="window.location='Harmony-home-furnishings-/category.html?cat=bed-room'">
-    <img src="https://images.unsplash.com/photo-1615874959474-d609969a20ed?q=80&w=2000">
-    <h3>Bedroom</h3>
-  </div>
+      <a href="/Harmony-home-furnishings-/category.html?cat=dining" class="category-card">
+        <h3>Dining</h3>
+      </a>
+    </div>
+  </section>
 
-  <!-- DINING -->
-  <div class="category-card" onclick="window.location='Harmony-home-furnishings-/category.html?cat=dining-room'">
-    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2000">
-    <h3>Dining</h3>
-  </div>
-
-  <!-- OUTDOOR -->
-  <div class="category-card" onclick="window.location='Harmony-home-furnishings-/category.html?cat=out-door'">
-    <img src="https://images.unsplash.com/photo-1503602642458-232111445657?q=80&w=2000">
-    <h3>Outdoor</h3>
-  </div>
-
-</section>
-
-<div data-include="global-footer.html"></div>
+  <div data-include="global-footer.html"></div>
 
 </body>
 </html>
