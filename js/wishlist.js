@@ -1,31 +1,43 @@
-// WISHLIST SYSTEM — stores items in localStorage
+/* ============================
+   WISHLIST SYSTEM (Harmony 2.0)
+============================ */
 
+const WISHLIST_KEY = "harmony_wishlist";
+
+/* Load wishlist */
 function getWishlist() {
-  return JSON.parse(localStorage.getItem("wishlist") || "[]");
+  return JSON.parse(localStorage.getItem(WISHLIST_KEY)) || [];
 }
 
+/* Save wishlist */
 function saveWishlist(list) {
-  localStorage.setItem("wishlist", JSON.stringify(list));
+  localStorage.setItem(WISHLIST_KEY, JSON.stringify(list));
+  updateWishlistCount();
 }
 
-function addToWishlist(product) {
-  const list = getWishlist();
+/* Add/remove toggle */
+function toggleWishlist(id) {
+  let list = getWishlist();
 
-  // prevent duplicates
-  if (!list.find(item => item.id === product.id)) {
-    list.push(product);
-    saveWishlist(list);
+  if (list.includes(id)) {
+    list = list.filter(item => item !== id);
+  } else {
+    list.push(id);
   }
 
-  // update header counter instantly
-  const el = document.getElementById("wishlist-count");
-  if (el) el.textContent = list.length;
-}
-
-function removeFromWishlist(id) {
-  const list = getWishlist().filter(item => item.id !== id);
   saveWishlist(list);
-
-  const el = document.getElementById("wishlist-count");
-  if (el) el.textContent = list.length;
 }
+
+/* Mini-heart counter */
+function updateWishlistCount() {
+  const list = getWishlist();
+  const count = list.length;
+
+  const heart = document.querySelector(".wishlist-icon");
+  if (heart) {
+    heart.textContent = `❤️ (${count})`;
+  }
+}
+
+/* Initialize on load */
+document.addEventListener("DOMContentLoaded", updateWishlistCount);
